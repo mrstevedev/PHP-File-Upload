@@ -1,18 +1,21 @@
 <?php
-// Get file uploaded
+// Check if form was submitted
 if(isset($_POST['submit'])) {
-
+    // Check if the file was uploaded 
     if(!empty($_FILES['file']['tmp_name'])) {
-       
+        // Get the file type
         $file_type = $_FILES['file']['type'];
+        // Create an array of file types
         $allowed_types = array('image/jpeg', 'image/jpg','image/png');
-        
+        // Check to see if the file types uploaded are not in the arrray.
         if(!in_array($file_type, $allowed_types)) {
             echo 'the file you uploaded is not allowed';
         }
+        // Restrict the uploaded file to under 1MB
         else if($_FILES['file']['size'] > 1000000){
             echo 'the file you uploaded is too large';
-        }        
+        }      
+        // Upload the file to the uploads directory  
          else {
             $path = 'uploads/';
             $path = $path . basename($_FILES['file']['name']);
